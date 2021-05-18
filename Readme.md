@@ -9,6 +9,8 @@ Also the format used while serialising and deserialising is as follows:
 [EOW]{space}[Number of Children]{space}[letter1]{space}(info about letter1)[letter2]{space}(info about letter2).....
 ```
 
+![Format explanation](screenchots/format.png)
+
 ## Usage
 
 >clone the repo and move into it.
