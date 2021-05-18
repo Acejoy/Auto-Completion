@@ -1,0 +1,7 @@
+abc
+abd
+ac
+acd
+car
+cat
+dcs
