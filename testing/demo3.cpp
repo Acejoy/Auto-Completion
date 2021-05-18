@@ -1,11 +1,10 @@
 #include "../Triesdef.h"
 
 int main() {
-    Trie t = Trie();
-    t.loadWords("test2.txt");    
+    Trie t = Trie("myTrie.txt");
     
     t.displayTrie();
-    t.serialiseTrie();
+    //t.serialiseTrie();
 
     return 0;
 }

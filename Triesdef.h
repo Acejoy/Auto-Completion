@@ -11,6 +11,8 @@ An implementation of Trie
 #include <stack>
 #include <vector>
 
+int getNumber(std::ifstream &s) { return 0; }
+
 class TrieNode {
     // class for node of Trie
     // each node contains
@@ -93,11 +95,13 @@ class Trie {
    public:
     // constructor class
     Trie() {
+        std::cout << "Creating new Trie object\n";
         root = new TrieNode();
         root->setEOW(false);
     }
 
     Trie(std::string filename) {
+        std::cout << "Creating new Trie object\n";
         root = new TrieNode();
         root->setEOW(false);
 
@@ -111,26 +115,33 @@ class Trie {
         }
     }
 
+    ~Trie() { std::cout << "Deleting current Trie object\n"; }
+
     void deserialise(TrieNode *node, std::ifstream &s) {
+        std::string curWord;
+
         char EOW;
-        s.get(EOW);
+        int numChildren;
 
-        char numChildren;
-        s.get(numChildren);
-
-        if (EOW == '0') {
+        // get EOW
+        getline(s, curWord, ' ');
+        if (curWord == "0") {
             node->setEOW(false);
         } else {
             node->setEOW(true);
         }
 
+        // get number of children
+        getline(s, curWord, ' ');
+        numChildren = stoi(curWord);
+
         int index = 0;
         char curLetter;
 
-        while (index <(int) (numChildren - '0')) {
-            s.get(curLetter);
-            node->setChild(curLetter);
-            deserialise(node->getChild(curLetter), s);
+        while (index < numChildren) {
+            getline(s, curWord, ' ');
+            node->setChild(curWord[0]);
+            deserialise(node->getChild(curWord[0]), s);
             index++;
         }
     }
@@ -250,9 +261,8 @@ class Trie {
         // then we cant delete any node.
         if (!curNode->hasChildren()) {
             int index = 0;
-            
-            while (!nodeStack.empty()) {
 
+            while (!nodeStack.empty()) {
                 curNode = nodeStack.top();
                 nodeStack.pop();
 
@@ -379,20 +389,25 @@ class Trie {
             serialiseTrieHelper(root, trieFile);
 
             trieFile.close();
+
+            std::cout << "The tRie is serialised and stored in myTrie.txt\n";
         }
     }
 
     void serialiseTrieHelper(TrieNode *node, std::fstream &s) {
         s << node->getEOW();
+        s << ' ';
 
         int num = node->getNumOfChildren();
         std::vector<char> keys = node->getChildrenKeys();
         s << num;
+        s << ' ';
 
         int index = 0;
 
         while (index < num) {
             s << keys[index];
+            s << ' ';
             serialiseTrieHelper(node->getChild(keys[index]), s);
             index++;
         }

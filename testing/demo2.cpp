@@ -1,11 +1,22 @@
-#include "Triesdef.h"
+#include <fstream>
+#include<iostream>
+#include "../Triesdef.h"
 
 int main(){
 
-    Trie t = Trie();
-    t.loadWords("words2.txt");
-    t.displayTrie();
-    t.deleteWord("dcs");
-    t.displayTrie();
+    std::ifstream s("test.txt");
+    std::string word;
+
+    while(!s.eof()) {
+        getline(s, word, ' ');
+
+        try{
+            std::cout<<stoi(word)<<'\n';
+        } catch(...) {
+            // std::cerr<<word<<std::endl;
+        }
+    }
+
+    s.close();
     return 0;
 }

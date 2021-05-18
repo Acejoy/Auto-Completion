@@ -80,7 +80,7 @@ int main() {
         }
 
         if (running) {
-            std::cout << menu + "Enter the option\n>>";
+            std::cout << menu + "====>Enter the option\n>>";
         }
     }
 }
