@@ -250,10 +250,12 @@ class Trie {
         // then we cant delete any node.
         if (!curNode->hasChildren()) {
             int index = 0;
-            curNode = nodeStack.top();
-            nodeStack.pop();
-
+            
             while (!nodeStack.empty()) {
+
+                curNode = nodeStack.top();
+                nodeStack.pop();
+
                 std::cout << "deleting letter....\n"
                           << word[wordLength - index - 1] << std::endl;
                 curNode->removeChild(word[wordLength - index - 1]);
@@ -265,9 +267,6 @@ class Trie {
                 // and EOW==true means this node is end of word for some word
                 if (curNode->getEOW() || curNode->getNumOfChildren() > 0) {
                     break;
-                } else {
-                    curNode = nodeStack.top();
-                    nodeStack.pop();
                 }
             }
         }
