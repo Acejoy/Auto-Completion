@@ -8,8 +8,8 @@ You can also visualise the trie on the terminal.
 >clone the repo and move into it.
 >for Windows, change encoding of terminal by :chcp 65001 to support utf-8 characters. No need to do it in linux.
 >run main.cpp by :
->g++ main.cpp -o main
->main
+>g++ main.cpp -o main,
+>then simply run main
 
 ## Screenshots
 
